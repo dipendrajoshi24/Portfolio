@@ -15,7 +15,7 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: "complaint-box",
-    title: "Complaint Box Management",
+    title: "University Complaint Desk System",
     description: "Full-stack MERN complaint platform with a real-time admin dashboard.",
     longDescription: "A full-stack MERN complaint management platform where users can submit complaints and admins can track, manage, and resolve them through a real-time dashboard. Includes authentication and live status updates so users always know where their complaint stands.",
     technologies: ["React", "Node.js", "Express.js", "MongoDB"],
@@ -30,7 +30,7 @@ export const projects: Project[] = [
   },
   {
     id: "stress-prediction",
-    title: "Stress Prediction System",
+    title: "Stress level Predction With Personalized Feedback",
     description: "ML-powered web app that predicts stress levels from user data.",
     longDescription: "A machine learning powered web application that predicts a user's stress level from their input data. Built with Python, Pandas, and NumPy for data processing and scikit-learn for the predictive models, with interactive visualizations to make the results easy to interpret.",
     technologies: ["Python", "Machine Learning", "Pandas", "NumPy", "scikit-learn"],
@@ -45,7 +45,7 @@ export const projects: Project[] = [
   },
   {
     id: "attendance-manager",
-    title: "Student Attendance Manager",
+    title: "Attendance System Using Face Recognition",
     description: "Desktop attendance app for teachers with PDF report generation.",
     longDescription: "A desktop application built with Python and Tkinter that lets teachers add students, mark attendance, manage records, and generate PDF reports. All data is persisted locally with SQLite.",
     technologies: ["Python", "Tkinter", "SQLite"],
