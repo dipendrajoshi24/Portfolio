@@ -97,7 +97,7 @@ export function About() {
                   src="/images/profile/dipendra.jpg"
                   alt="Dipendra Joshi — Full Stack Developer"
                   fill
-                  sizes="(max-width: 768px) 300px, 380px"
+                  sizes="(max-width: 768px) 340px, 420px"
                   className="object-cover"
                   priority
                 />
