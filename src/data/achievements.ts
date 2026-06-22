@@ -27,7 +27,7 @@ export const educationData: Education[] = [
     id: "gehu",
     institution: "Graphic Era Hill University",
     degree: "Bachelor of Computer Applications (BCA)",
-    duration: "2023 - 2026",
+    duration: "2024 - 2027",
     location: "Dehradun, India",
   }
 ];

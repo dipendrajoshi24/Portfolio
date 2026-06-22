@@ -235,7 +235,7 @@ export function About() {
           >
             Education
           </motion.h3>
-          <div className="grid sm:grid-cols-2 gap-4 sm:gap-6 max-w-3xl mx-auto">
+          <div className="grid grid-cols-1 place-items-center max-w-3xl mx-auto">
             {educationData.map((edu, index) => (
               <motion.div
                 key={edu.id}
