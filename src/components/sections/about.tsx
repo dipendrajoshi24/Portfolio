@@ -88,7 +88,7 @@ export function About() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="mx-auto md:mx-0 w-full max-w-[300px] md:max-w-none"
+            className="mx-auto md:mx-0 w-full max-w-[420px] md:max-w-none"
           >
             <div className="relative rounded-2xl overflow-hidden border border-border/60 shadow-xl">
               <div className="absolute -inset-2 rounded-[1.25rem] bg-gradient-to-br from-primary/30 via-accent/20 to-primary/30 blur-xl -z-10" />
@@ -97,7 +97,7 @@ export function About() {
                   src="/images/profile/dipendra.jpg"
                   alt="Dipendra Joshi — Full Stack Developer"
                   fill
-                  sizes="(max-width: 768px) 340px, 420px"
+                  sizes="(max-width: 768px) 420px, 520px"
                   className="object-cover"
                   priority
                 />
