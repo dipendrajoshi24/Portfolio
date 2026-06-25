@@ -68,7 +68,7 @@ export function About() {
               About <GradientText>Me</GradientText>
             </h2>
             <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto px-2">
-              The person behind the code — what I work on and what drives me.
+              The person behind the code :) what I work on and what drives me.
             </p>
           </motion.div>
         </ScrollReveal>
@@ -97,7 +97,7 @@ export function About() {
                   src="/images/profile/dipendra.jpg"
                   alt="Dipendra Joshi — Full Stack Developer"
                   fill
-                  sizes="(max-width: 768px) 420px, 520px"
+                  sizes="(max-width: 772) 430, 530"
                   className="object-cover"
                   priority
                 />
@@ -152,29 +152,29 @@ export function About() {
           </motion.div>
 
           {/* Bio + quick facts */}
-          <div>
-            <div className="space-y-4 mb-8">
-              <p className="text-base sm:text-lg leading-relaxed">
-                I&apos;m <span className="font-semibold text-foreground">Dipendra Joshi</span>, a Full
-                Stack Developer and Bachelor of Computer Applications student at Graphic Era
-                Hill University, Dehradun. I work primarily with the MERN stack, building
-                products from the database up to a polished, responsive interface.
-              </p>
-              <p className="text-base sm:text-lg leading-relaxed text-muted-foreground">
-                My approach is hands-on: I learn by building, debugging, and rebuilding —
-                a habit that started with breaking things just to understand why they
-                broke, and never really stopped. I care about writing code that&apos;s
-                clean enough for someone else to read and maintain, not just code that
-                happens to work.
-              </p>
-              <p className="text-base sm:text-lg leading-relaxed text-muted-foreground">
-                Beyond web development, I work with Python for data analysis and
-                machine learning, and I keep my fundamentals sharp with C and C++.
-                I&apos;m currently focused on shipping real projects, contributing to
-                open source, and continuing to grow as a well-rounded engineer.
-              </p>
-            </div>
-
+          {/* Bio + quick facts */}
+<div>
+  <div className="space-y-4 mb-8">
+    <p className="text-base sm:text-lg leading-relaxed text-justify">
+      I&apos;m <span className="font-semibold text-foreground">Dipendra Joshi</span>, a Full
+      Stack Developer and Bachelor of Computer Applications student at Graphic Era
+      Hill University, Dehradun. I work primarily with the MERN stack, building
+      products from the database up to a polished, responsive interface.
+    </p>
+    <p className="text-base sm:text-lg leading-relaxed text-muted-foreground text-justify">
+      My approach is hands-on: I learn by building, debugging, and rebuilding 
+      a habit that started with breaking things just to understand why they
+      broke, and never really stopped. I care about writing code that&apos;s
+      clean enough for someone else to read and maintain, not just code that
+      happens to work.
+    </p>
+    <p className="text-base sm:text-lg leading-relaxed text-muted-foreground text-justify">
+      Beyond web development, I work with Python for data analysis and
+      machine learning, and I keep my fundamentals sharp with C and C++.
+      I&apos;m currently focused on shipping real projects, contributing to
+      open source, and continuing to grow as a well-rounded engineer.
+    </p>
+  </div>  
             {/* Quick facts strip */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 p-4 sm:p-5 rounded-xl border border-border/50 bg-muted/40">
               {QUICK_FACTS.map((fact) => (
