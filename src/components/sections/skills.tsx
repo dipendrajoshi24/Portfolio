@@ -24,6 +24,7 @@ import {
   SiPostman,
 } from "react-icons/si";
 import { IconType } from "react-icons";
+import { useRef, useCallback } from "react";
 import { skillsData } from "@/data/skills";
 import { ANIMATION_VARIANTS } from "@/lib/constants";
 
@@ -50,7 +51,78 @@ const ICON_MAP: Record<string, IconType> = {
   SiPostman,
 };
 
+// Piano note frequencies mapped to a C major scale
+const HOVER_NOTES = [261.63, 293.66, 329.63, 349.23, 392.00, 440.00, 493.88, 523.25];
+const CLICK_NOTES = [523.25, 659.25, 783.99]; // C5, E5, G5 chord
+
+function playPianoNote(
+  ctx: AudioContext,
+  frequency: number,
+  duration: number = 0.8,
+  volume: number = 0.18
+) {
+  const oscillator = ctx.createOscillator();
+  const gainNode = ctx.createGain();
+  const harmonicOsc = ctx.createOscillator(); // adds warmth
+  const harmonicGain = ctx.createGain();
+
+  // Main tone
+  oscillator.type = "sine";
+  oscillator.frequency.setValueAtTime(frequency, ctx.currentTime);
+
+  // Harmonic (octave up, quieter) for piano-like overtone
+  harmonicOsc.type = "sine";
+  harmonicOsc.frequency.setValueAtTime(frequency * 2, ctx.currentTime);
+  harmonicGain.gain.setValueAtTime(volume * 0.3, ctx.currentTime);
+
+  // Piano-like envelope: sharp attack, quick decay, slow release
+  gainNode.gain.setValueAtTime(0, ctx.currentTime);
+  gainNode.gain.linearRampToValueAtTime(volume, ctx.currentTime + 0.01);
+  gainNode.gain.exponentialRampToValueAtTime(volume * 0.4, ctx.currentTime + 0.1);
+  gainNode.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + duration);
+
+  harmonicGain.gain.setValueAtTime(0, ctx.currentTime);
+  harmonicGain.gain.linearRampToValueAtTime(volume * 0.3, ctx.currentTime + 0.01);
+  harmonicGain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + duration * 0.6);
+
+  oscillator.connect(gainNode);
+  harmonicOsc.connect(harmonicGain);
+  gainNode.connect(ctx.destination);
+  harmonicGain.connect(ctx.destination);
+
+  oscillator.start(ctx.currentTime);
+  oscillator.stop(ctx.currentTime + duration);
+  harmonicOsc.start(ctx.currentTime);
+  harmonicOsc.stop(ctx.currentTime + duration * 0.6);
+}
+
 export function Skills() {
+  const audioCtxRef = useRef<AudioContext | null>(null);
+
+  const getAudioContext = useCallback(() => {
+    if (!audioCtxRef.current) {
+      audioCtxRef.current = new AudioContext();
+    }
+    if (audioCtxRef.current.state === "suspended") {
+      audioCtxRef.current.resume();
+    }
+    return audioCtxRef.current;
+  }, []);
+
+  const handleHover = useCallback((index: number) => {
+    const ctx = getAudioContext();
+    const note = HOVER_NOTES[index % HOVER_NOTES.length];
+    playPianoNote(ctx, note, 0.6, 0.15);
+  }, [getAudioContext]);
+
+  const handleClick = useCallback(() => {
+    const ctx = getAudioContext();
+    // Play a soft C major chord arpeggio on click
+    CLICK_NOTES.forEach((freq, i) => {
+      setTimeout(() => playPianoNote(ctx, freq, 1.0, 0.12), i * 60);
+    });
+  }, [getAudioContext]);
+
   return (
     <section className="py-16 sm:py-20 px-4 sm:px-6 bg-muted/30" id="skills">
       <div className="container mx-auto max-w-7xl">
@@ -94,6 +166,7 @@ export function Skills() {
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
                 {category.skills.map((skill, skillIndex) => {
                   const Icon = ICON_MAP[skill.icon];
+                  const globalIndex = categoryIndex * 10 + skillIndex;
                   return (
                     <motion.div
                       key={skill.name}
@@ -103,10 +176,12 @@ export function Skills() {
                       transition={{
                         duration: 0.3,
                         delay: categoryIndex * 0.05 + skillIndex * 0.04,
-                        ease: "easeOut"
+                        ease: "easeOut",
                       }}
                       whileHover={{ y: -4 }}
-                      className="flex flex-col items-center justify-center gap-2 sm:gap-3 rounded-xl border border-border/50 bg-card hover:border-primary/40 hover:shadow-md transition-all duration-300 p-4 sm:p-5 text-center"
+                      onHoverStart={() => handleHover(globalIndex)}
+                      onClick={() => handleClick()}
+                      className="flex flex-col items-center justify-center gap-2 sm:gap-3 rounded-xl border border-border/50 bg-card hover:border-primary/40 hover:shadow-md transition-all duration-300 p-4 sm:p-5 text-center cursor-pointer"
                     >
                       {Icon && (
                         <Icon
